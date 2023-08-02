@@ -17,11 +17,11 @@ function App(): JSX.Element {
   return (
     // <SafeAreaView>
 
-    <View style={{flex: 1, backgroundColor: 'red'}}>
+    <>
       <MyClasssComponent />
       <MyFuncComponent />
       <CustomFlex />
-    </View>
+    </>
     // </SafeAreaView>
   );
 }

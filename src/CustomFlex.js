@@ -4,10 +4,17 @@ import {Text, Image, View} from 'react-native';
 class CustomFlex extends React.Component {
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'red'}}>
-        <View style={{flex: 2, backgroundColor: 'pink'}} />
-        <View style={{flex: 3, backgroundColor: 'darkorange'}} />
-        <View style={{flex: 4, backgroundColor: 'green'}} />
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'red',
+          flexDirection: 'row-reverse',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+        }}>
+        <View style={{width: 100, height: 100, backgroundColor: 'yellow'}} />
+        <View style={{width: 100, height: 100, backgroundColor: 'orange'}} />
+        <View style={{width: 100, height: 100, backgroundColor: 'green'}} />
       </View>
     );
   }
