@@ -7,7 +7,7 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
-import {SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
+import {SafeAreaView, TextInput, StyleSheet, View, Text} from 'react-native';
 import MyClasssComponent from './MyClassComponent';
 import MyFuncComponent from './MyFuncComponent';
 import UserProfile from './UserProfile';
@@ -18,7 +18,9 @@ function App(): JSX.Element {
     // <SafeAreaView>
 
     <>
-      <MyClasssComponent />
+      <MyClasssComponent bgcolor={'skyblue'}>
+        <Text>Embedded HOC</Text>
+      </MyClasssComponent>
       <MyFuncComponent />
       <CustomFlex />
     </>
