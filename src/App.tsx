@@ -7,18 +7,22 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
-import {SafeAreaView, TextInput, StyleSheet} from 'react-native';
+import {SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
 import MyClasssComponent from './MyClassComponent';
 import MyFuncComponent from './MyFuncComponent';
 import UserProfile from './UserProfile';
+import CustomFlex from './CustomFlex';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView>
+    // <SafeAreaView>
+
+    <View style={{flex: 1, backgroundColor: 'red'}}>
       <MyClasssComponent />
       <MyFuncComponent />
-      <UserProfile />
-    </SafeAreaView>
+      <CustomFlex />
+    </View>
+    // </SafeAreaView>
   );
 }
 
