@@ -60,6 +60,11 @@ const CarList = ({navigation}) => {
       },
     ]); //Using spread operator appending the data into static car data
     setisModalvalue(false);
+    setNewCarName('Car Name');
+    setNewCarModel('Car Model');
+    setNewCarYear('Year');
+    setNewCarColor('Color');
+    setNewCarPrice('Price');
   };
 
   const renderModal = () => {
