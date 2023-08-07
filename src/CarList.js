@@ -41,12 +41,25 @@ const DATA = [
 const CarList = ({navigation}) => {
   const [getcarData, setcarData] = useState(DATA);
   const [isModalValue, setisModalvalue] = useState(false);
-  const [getNewCarData, setNewCarData] = useState('Add your Favourite Car');
+  const [getNewCarName, setNewCarName] = useState('Car Name');
+  const [getNewCarModel, setNewCarModel] = useState('Car Model');
+  const [getNewCarYear, setNewCarYear] = useState('Year');
+  const [getNewCarColor, setNewCarColor] = useState('Color');
+  const [getNewCarPrice, setNewCarPrice] = useState('Price');
 
   const onsubmitHandler = index => {
-    setcarData([...getcarData, {id: index, Make: getNewCarData}]); //Using spread operator appending the data into static car data
+    setcarData([
+      ...getcarData,
+      {
+        id: index,
+        Make: getNewCarName,
+        Model: getNewCarModel,
+        year: getNewCarYear,
+        color: getNewCarColor,
+        price: getNewCarPrice,
+      },
+    ]); //Using spread operator appending the data into static car data
     setisModalvalue(false);
-    setNewCarData('Add your Favourite Car');
   };
 
   const renderModal = () => {
@@ -55,11 +68,40 @@ const CarList = ({navigation}) => {
         <View>
           <TextInput
             style={styles.item}
-            value={getNewCarData}
+            value={getNewCarName}
             autoCapitalize="none"
             onChangeText={changedcarName => {
-              setNewCarData(changedcarName);
+              setNewCarName(changedcarName);
             }}></TextInput>
+          <TextInput
+            style={styles.item}
+            value={getNewCarModel}
+            autoCapitalize="none"
+            onChangeText={Model => {
+              setNewCarModel(Model);
+            }}></TextInput>
+          <TextInput
+            style={styles.item}
+            value={getNewCarYear}
+            autoCapitalize="none"
+            onChangeText={year => {
+              setNewCarYear(year);
+            }}></TextInput>
+          <TextInput
+            style={styles.item}
+            value={getNewCarColor}
+            autoCapitalize="none"
+            onChangeText={color => {
+              setNewCarColor(color);
+            }}></TextInput>
+          <TextInput
+            style={styles.item}
+            value={getNewCarPrice}
+            autoCapitalize="none"
+            onChangeText={price => {
+              setNewCarPrice(price);
+            }}></TextInput>
+
           <TouchableOpacity
             style={{
               height: 50,
