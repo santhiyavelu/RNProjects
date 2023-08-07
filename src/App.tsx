@@ -6,80 +6,40 @@
  */
 
 import React from 'react';
-import {View, Text, LogBox, StyleSheet, Button} from 'react-native';
+import {
+  View,
+  Text,
+  LogBox,
+  StyleSheet,
+  Button,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import CityFlatlist from './CityFlatList';
+import CarDetails from './CarDetails';
+import CarList from './CarList';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
+const image = {
+  uri: '/Users/santhiyavelusamy/Documents/AwesomeProject1/src/assets/car1.jpg',
+};
 
 const Homescreen = ({navigation}) => {
-  console.log(navigation, 'navigation');
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'skyblue',
-      }}>
-      <CityFlatlist />
-      <Text>Home Screen</Text>
-      {/* Navigate details to the Details route with params */}
-      <Button
-        title="Go to Details"
-        onPress={() =>
-          navigation.navigate('Details', {
-            itemId: 86,
-            message: 'anything you want order here',
-          })
-        }
-      />
-    </View>
-  );
-};
-
-const DetailScreen = ({route, navigation}) => {
-  const {itemId, message} = route.params;
-  console.log(route.params, 'routerdetails');
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'yellow',
-      }}>
-      <Text>Details Screen</Text>
-      <Text>item id: {JSON.stringify(itemId)}</Text>
-      <Text>Message: {JSON.stringify(message)}</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() =>
-          navigation.push('Details', {itemId: Math.floor(Math.random() * 100)})
-        }
-      />
-      <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
-      <Button
-        title="Go to Service Screen"
-        onPress={() => navigation.navigate('Service')}
-      />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-};
-
-const ServiceScreen = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'green',
-      }}>
-      <Text>Service Screen</Text>
+    <View style={styles.container}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <Text style={styles.text}>Welcome! CAR</Text>
+        <Text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium
+          ad ducimus ipsum saepe, similique delectus eveniet suscipit.
+        </Text>
+        <TouchableOpacity onPress={() => navigation.navigate('CarList')}>
+          <Text style={styles.listtext}>CAR LIST</Text>
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 };
@@ -89,22 +49,57 @@ const Stack = createNativeStackNavigator();
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#cd6850',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}>
         <Stack.Screen
           name="Home"
           component={Homescreen}
-          options={{title: 'Home'}}></Stack.Screen>
+          options={{
+            title: 'Home',
+          }}></Stack.Screen>
+        <Stack.Screen name="CarList" component={CarList}></Stack.Screen>
         <Stack.Screen
           name="Details"
-          component={DetailScreen}
-          options={{title: 'Details'}}></Stack.Screen>
-        <Stack.Screen name="Service" component={ServiceScreen}></Stack.Screen>
+          component={CarDetails}
+          options={{title: 'CarDetails'}}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 35,
+    lineHeight: 84,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+  listtext: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000000c0',
+  },
   input: {
     height: 40,
     margin: 12,
