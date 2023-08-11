@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
   View,
   Text,
-  LogBox,
   StyleSheet,
   Button,
   FlatList,
@@ -47,11 +46,11 @@ const CarList = ({navigation}) => {
   const [getNewCarColor, setNewCarColor] = useState('Color');
   const [getNewCarPrice, setNewCarPrice] = useState('Price');
 
-  const onsubmitHandler = index => {
+  const onsubmitHandler = () => {
     setcarData([
       ...getcarData,
       {
-        id: index,
+        id: Math.floor(Math.random() * 100),
         Make: getNewCarName,
         Model: getNewCarModel,
         year: getNewCarYear,
@@ -116,7 +115,7 @@ const CarList = ({navigation}) => {
               margin: 10,
             }}
             onPress={index => {
-              onsubmitHandler(index);
+              onsubmitHandler();
             }}>
             <Text>Submit</Text>
           </TouchableOpacity>

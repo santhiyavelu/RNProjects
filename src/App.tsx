@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -22,34 +23,53 @@ import CityFlatlist from './CityFlatList';
 import CarDetails from './CarDetails';
 import CarList from './CarList';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
-const image = {
-  uri: '/Users/santhiyavelusamy/Documents/AwesomeProject1/src/assets/car1.jpg',
-};
-
-const Homescreen = ({navigation}) => {
-  return (
-    <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <Text style={styles.text}>Welcome! CAR</Text>
-        <Text>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-          ad ducimus ipsum saepe, similique delectus eveniet suscipit.
-        </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('CarList')}>
-          <Text style={styles.listtext}>CAR LIST</Text>
-        </TouchableOpacity>
-      </ImageBackground>
-    </View>
-  );
-};
+import UseEffectcomponent from './useEffectcomponent';
+import LoginScreen from './containers/LoginScreen/LoginScreen';
+import HomeScreen from './containers/HomeScreen/HomeScreen';
+import UserProfile from './UserProfile';
+import persistenthelper from './helper/persistenthelper';
+import {EventRegister} from 'react-native-event-listeners';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  // const isUserLoggedIn = false;
+
+  const getUserName = async () => {
+    const username = await persistenthelper.getValue('username');
+    console.log(username, 'username');
+    setIsUserLoggedIn(username ? true : false);
+  };
+
+  useEffect(() => {
+    getUserName();
+
+    let event = EventRegister.addEventListener('userLoggedIn', data => {
+      console.log(data, 'loggedin');
+      setIsUserLoggedIn(data.username ? true : false);
+    });
+
+    return () => {
+      EventRegister.removeEventListener(event);
+    };
+  }, []);
+
+  const getAuthStack = () => {
+    return (
+      <Stack.Group>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{title: 'Login'}}
+        />
+      </Stack.Group>
+    );
+  };
+
+  const getMainStack = () => {
+    return (
+      <Stack.Group
         screenOptions={{
           headerStyle: {
             backgroundColor: '#cd6850',
@@ -61,17 +81,28 @@ function App(): JSX.Element {
         }}>
         <Stack.Screen
           name="Home"
-          component={Homescreen}
-          options={{
-            title: 'Home',
-          }}></Stack.Screen>
-        <Stack.Screen name="CarList" component={CarList}></Stack.Screen>
+          component={HomeScreen}
+          options={{title: 'Overview'}}
+        />
         <Stack.Screen
-          name="Details"
-          component={CarDetails}
-          options={{title: 'CarDetails'}}></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+          name="UserProfile"
+          component={UserProfile}
+          options={{title: 'Overview'}}
+        />
+      </Stack.Group>
+    );
+  };
+
+  return (
+    <>
+      <NavigationContainer>
+        <Stack.Navigator>
+          {isUserLoggedIn ? getMainStack() : getAuthStack()}
+        </Stack.Navigator>
+      </NavigationContainer>
+      {/* <CityFlatlist /> */}
+      {/* <UseEffectcomponent /> */}
+    </>
   );
 }
 

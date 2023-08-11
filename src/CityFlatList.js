@@ -32,12 +32,13 @@ const cityData = [
   },
   {id: 5, city: 'chennai'},
   {id: 6, city: 'London'},
+  {id: 7, city: 'Singapore'},
 ];
 
 const CityFlatlist = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [getmodalvalue, setModalvalue] = useState('');
-  const [isModalVisible, setisModalvisible] = useState(true);
+  const [isModalVisible, setisModalvisible] = useState(false);
   const [cityValues, setCityvalues] = useState(cityData);
 
   const toggleModal = () => {
@@ -63,8 +64,8 @@ const CityFlatlist = () => {
               alignItems: 'center',
               margin: 10,
             }}
-            onPress={() => {
-              setCityvalues([...cityValues, {city: getmodalvalue}]); //Using spread operator appending the data from static cityData
+            onPress={index => {
+              setCityvalues([...cityValues, {id: index, city: getmodalvalue}]); //Using spread operator appending the data from static cityData
             }}>
             <Text>Submit</Text>
           </TouchableOpacity>
@@ -77,6 +78,7 @@ const CityFlatlist = () => {
       </Modal>
     );
   };
+
   const handleSearch = searchText => {
     if (searchText) {
       const filteredData = cityValues.filter(cityname => {

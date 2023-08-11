@@ -1,8 +1,11 @@
 import React from 'react';
 import {View, TextInput, TouchableOpacity, Text} from 'react-native';
 import CommonTextInput from './CommonTextInput';
+import CustomImage from './CustomFlex';
 
 const UserProfile = () => {
+  const onSubmit = () => console.log('submit');
+
   return (
     <View>
       <CommonTextInput placeholder="First Name" />
@@ -10,7 +13,7 @@ const UserProfile = () => {
       <CommonTextInput placeholder="City" />
       <CommonTextInput placeholder="Country" />
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onSubmit}>
         <Text>Submit</Text>
       </TouchableOpacity>
     </View>
