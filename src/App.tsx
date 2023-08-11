@@ -29,6 +29,8 @@ import HomeScreen from './containers/HomeScreen/HomeScreen';
 import UserProfile from './UserProfile';
 import persistenthelper from './helper/persistenthelper';
 import {EventRegister} from 'react-native-event-listeners';
+import MyClasssComponent from './MyClassComponent';
+import ListScreen from './containers/ListScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,7 +40,7 @@ function App(): JSX.Element {
 
   const getUserName = async () => {
     const username = await persistenthelper.getValue('username');
-    console.log(username, 'username');
+    // console.log(username, 'username');
     setIsUserLoggedIn(username ? true : false);
   };
 
@@ -46,7 +48,7 @@ function App(): JSX.Element {
     getUserName();
 
     let event = EventRegister.addEventListener('userLoggedIn', data => {
-      console.log(data, 'loggedin');
+      // console.log(data, 'loggedin');
       setIsUserLoggedIn(data.username ? true : false);
     });
 
@@ -80,6 +82,12 @@ function App(): JSX.Element {
           },
         }}>
         <Stack.Screen
+          name="List"
+          component={ListScreen}
+          options={{title: 'List'}}
+        />
+
+        <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{title: 'Overview'}}
@@ -100,6 +108,7 @@ function App(): JSX.Element {
           {isUserLoggedIn ? getMainStack() : getAuthStack()}
         </Stack.Navigator>
       </NavigationContainer>
+      {/* <MyClasssComponent /> */}
       {/* <CityFlatlist /> */}
       {/* <UseEffectcomponent /> */}
     </>

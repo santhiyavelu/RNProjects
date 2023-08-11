@@ -17,10 +17,23 @@ const image = {
 };
 
 const Homescreen = ({navigation}) => {
+  const [loggedUser, setLoggedUser] = useState('');
+
+  useEffect(() => {
+    EventRegister.addEventListener('userLoggedIn', data => {
+      console.log(data.username, 'username');
+      setLoggedUser(data.username);
+    });
+
+    // return () => {
+    //   EventRegister.removeEventListener(event);
+    // };
+  }, []);
+
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <Text style={styles.text}>Welcome! {getUser}</Text>
+        <Text style={styles.text}>Welcome ! {loggedUser}</Text>
         <Text>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium
           ad ducimus ipsum saepe, similique delectus eveniet suscipit.
