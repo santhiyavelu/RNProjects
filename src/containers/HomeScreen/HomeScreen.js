@@ -11,13 +11,22 @@ import {
 } from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 import persistenthelper from '../../helper/persistenthelper';
-
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  increment,
+  decrement,
+  decrementByAmount,
+  incrementByAmount,
+} from '../../features/counter/counterSlice';
 const image = {
   uri: '/Users/santhiyavelusamy/Documents/AwesomeProject1/src/assets/car1.jpg',
 };
 
 const Homescreen = ({navigation}) => {
   const [loggedUser, setLoggedUser] = useState('');
+
+  const count = useSelector(state => state.counter.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     EventRegister.addEventListener('userLoggedIn', data => {
@@ -32,16 +41,29 @@ const Homescreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <Text style={styles.text}>Welcome ! {loggedUser}</Text>
-        <Text>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-          ad ducimus ipsum saepe, similique delectus eveniet suscipit.
-        </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('CarList')}>
-          {/* <Text style={styles.listtext}>CAR LIST</Text> */}
-        </TouchableOpacity>
-      </ImageBackground>
+      {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}> */}
+      <Text style={styles.text}>Welcome ! {loggedUser}</Text>
+      <Text>{count}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('CarList')}>
+        {/* <Text style={styles.listtext}>CAR LIST</Text> */}
+      </TouchableOpacity>
+      {/* </ImageBackground> */}
+
+      <TouchableOpacity
+        style={styles.buttonText}
+        onPress={() => {
+          dispatch(increment());
+        }}>
+        <Text>Increment</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonText}
+        onPress={() => {
+          dispatch(decrement());
+        }}>
+        <Text>Decrement</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity
         onPress={() => {
@@ -49,14 +71,7 @@ const Homescreen = ({navigation}) => {
 
           EventRegister.emit('userLoggedIn', {username: undefined});
         }}
-        style={{
-          height: 50,
-          margin: 10,
-          backgroundColor: 'white',
-          paddingHorizontal: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+        style={styles.buttonText}>
         <Text>Logout</Text>
       </TouchableOpacity>
     </View>
@@ -89,6 +104,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
     justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  buttonText: {
+    height: 50,
+    margin: 10,
+    backgroundColor: 'white',
+    paddingHorizontal: 10,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 });

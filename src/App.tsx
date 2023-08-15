@@ -31,6 +31,9 @@ import persistenthelper from './helper/persistenthelper';
 import {EventRegister} from 'react-native-event-listeners';
 import MyClasssComponent from './MyClassComponent';
 import ListScreen from './containers/ListScreen';
+import {Provider} from 'react-redux';
+import store from './store';
+import {increment, decrement} from './features/counter/counterslice';
 
 const Stack = createNativeStackNavigator();
 
@@ -82,16 +85,16 @@ function App(): JSX.Element {
           },
         }}>
         <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Overview'}}
+        />
+        <Stack.Screen
           name="List"
           component={ListScreen}
           options={{title: 'List'}}
         />
 
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Overview'}}
-        />
         <Stack.Screen
           name="UserProfile"
           component={UserProfile}
@@ -102,16 +105,13 @@ function App(): JSX.Element {
   };
 
   return (
-    <>
+    <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
           {isUserLoggedIn ? getMainStack() : getAuthStack()}
         </Stack.Navigator>
       </NavigationContainer>
-      {/* <MyClasssComponent /> */}
-      {/* <CityFlatlist /> */}
-      {/* <UseEffectcomponent /> */}
-    </>
+    </Provider>
   );
 }
 
