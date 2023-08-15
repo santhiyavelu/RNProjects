@@ -34,6 +34,7 @@ import ListScreen from './containers/ListScreen';
 import {Provider} from 'react-redux';
 import store from './store';
 import {increment, decrement} from './features/counter/counterslice';
+import CartScreen from './containers/cardScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -85,20 +86,26 @@ function App(): JSX.Element {
           },
         }}>
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Overview'}}
-        />
-        <Stack.Screen
           name="List"
           component={ListScreen}
           options={{title: 'List'}}
         />
 
         <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'Overview'}}
+        />
+
+        <Stack.Screen
           name="UserProfile"
           component={UserProfile}
           options={{title: 'Overview'}}
+        />
+        <Stack.Screen
+          name="CartScreen"
+          component={CartScreen}
+          options={{title: 'Cart'}}
         />
       </Stack.Group>
     );
