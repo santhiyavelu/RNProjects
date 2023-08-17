@@ -3,11 +3,14 @@ import {View, TouchableOpacity, Text, TextInput} from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 import styles from './styles';
 import persistenthelper from '../../helper/persistenthelper';
+import {useSelector, useDispatch} from 'react-redux';
+import {logIn} from '../../features/Auth/AuthSlice';
 
 const LoginScreen = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const {route} = props;
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     persistenthelper.setObject('mytestobject', {
@@ -38,8 +41,9 @@ const LoginScreen = props => {
       <TouchableOpacity
         style={styles.submit}
         onPress={() => {
-          persistenthelper.setData('username', username);
-          EventRegister.emit('userLoggedIn', {username});
+          dispatch(logIn());
+          // persistenthelper.setData('username', username);
+          // EventRegister.emit('userLoggedIn', {username});
         }}>
         <Text style={styles.buttontext}>Login</Text>
       </TouchableOpacity>

@@ -18,6 +18,8 @@ import {
   decrementByAmount,
   incrementByAmount,
 } from '../../features/counter/counterSlice';
+import {logOut} from '../../features/Auth/AuthSlice';
+
 const image = {
   uri: '/Users/santhiyavelusamy/Documents/AwesomeProject1/src/assets/car1.jpg',
 };
@@ -67,9 +69,10 @@ const Homescreen = ({navigation}) => {
 
       <TouchableOpacity
         onPress={() => {
-          persistenthelper.deleteValue('username', null);
+          dispatch(logOut());
 
-          EventRegister.emit('userLoggedIn', {username: undefined});
+          // persistenthelper.deleteValue('username', null);
+          // EventRegister.emit('userLoggedIn', {username: undefined});
         }}
         style={styles.buttonText}>
         <Text>Logout</Text>

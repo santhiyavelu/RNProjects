@@ -35,88 +35,98 @@ import {Provider} from 'react-redux';
 import store from './store';
 import {increment, decrement} from './features/counter/counterslice';
 import CartScreen from './containers/cardScreen';
+import {useSelector, useDispatch} from 'react-redux';
+import {AuthSlice} from './features/Auth/AuthSlice';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  // const isUserLoggedIn = false;
 
-  const getUserName = async () => {
-    const username = await persistenthelper.getValue('username');
-    // console.log(username, 'username');
-    setIsUserLoggedIn(username ? true : false);
-  };
+  // const getUserName = async () => {
+  //   const username = await persistenthelper.getValue('username');
+  //   // console.log(username, 'username');
+  //   setIsUserLoggedIn(username ? true : false);
+  // };
 
-  useEffect(() => {
-    getUserName();
+  // useEffect(() => {
+  //   getUserName();
 
-    let event = EventRegister.addEventListener('userLoggedIn', data => {
-      // console.log(data, 'loggedin');
-      setIsUserLoggedIn(data.username ? true : false);
-    });
+  //   let event = EventRegister.addEventListener('userLoggedIn', data => {
+  //     // console.log(data, 'loggedin');
+  //     setIsUserLoggedIn(data.username ? true : false);
+  //   });
 
-    return () => {
-      EventRegister.removeEventListener(event);
+  //   return () => {
+  //     EventRegister.removeEventListener(event);
+  //   };
+  // }, []);
+  const Nav = () => {
+    const isUserLoggedIn = useSelector(state => state.Auth.isloggedin);
+
+    console.log(isUserLoggedIn, 'isUserloggedin');
+
+    const getAuthStack = () => {
+      return (
+        <Stack.Group>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{title: 'Login'}}
+          />
+        </Stack.Group>
+      );
     };
-  }, []);
 
-  const getAuthStack = () => {
+    const getMainStack = () => {
+      return (
+        <Stack.Group
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#cd6850',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{title: 'Overview'}}
+          />
+
+          <Stack.Screen
+            name="List"
+            component={ListScreen}
+            options={{title: 'List'}}
+          />
+
+          <Stack.Screen
+            name="UserProfile"
+            component={UserProfile}
+            options={{title: 'Overview'}}
+          />
+          <Stack.Screen
+            name="CartScreen"
+            component={CartScreen}
+            options={{title: 'Cart'}}
+          />
+        </Stack.Group>
+      );
+    };
+
     return (
-      <Stack.Group>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{title: 'Login'}}
-        />
-      </Stack.Group>
-    );
-  };
-
-  const getMainStack = () => {
-    return (
-      <Stack.Group
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#cd6850',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-        }}>
-        <Stack.Screen
-          name="List"
-          component={ListScreen}
-          options={{title: 'List'}}
-        />
-
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: 'Overview'}}
-        />
-
-        <Stack.Screen
-          name="UserProfile"
-          component={UserProfile}
-          options={{title: 'Overview'}}
-        />
-        <Stack.Screen
-          name="CartScreen"
-          component={CartScreen}
-          options={{title: 'Cart'}}
-        />
-      </Stack.Group>
+      <Stack.Navigator>
+        {isUserLoggedIn ? getMainStack() : getAuthStack()}
+      </Stack.Navigator>
     );
   };
 
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          {isUserLoggedIn ? getMainStack() : getAuthStack()}
-        </Stack.Navigator>
+        <Nav />
       </NavigationContainer>
     </Provider>
   );
