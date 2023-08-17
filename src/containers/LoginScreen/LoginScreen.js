@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {View, TouchableOpacity, Text, TextInput} from 'react-native';
 import {EventRegister} from 'react-native-event-listeners';
 import styles from './styles';
@@ -12,6 +12,10 @@ const LoginScreen = props => {
 
   const dispatch = useDispatch();
 
+  // Focus the username using ref
+  const focusUser = useRef();
+  const focusPassword = useRef();
+
   useEffect(() => {
     persistenthelper.setObject('mytestobject', {
       firstName: 'Santhiya',
@@ -22,6 +26,7 @@ const LoginScreen = props => {
   return (
     <View>
       <TextInput
+        ref={focusUser}
         value={username}
         onChangeText={changedText => {
           setUsername(changedText);
@@ -30,6 +35,7 @@ const LoginScreen = props => {
         style={styles.textinput}
       />
       <TextInput
+        ref={focusPassword}
         value={password}
         onChangeText={changedText => {
           setPassword(changedText);
@@ -46,6 +52,21 @@ const LoginScreen = props => {
           // EventRegister.emit('userLoggedIn', {username});
         }}>
         <Text style={styles.buttontext}>Login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.submit}
+        onPress={() => {
+          focusUser.current.focus();
+        }}>
+        <Text style={styles.buttontext}>Focus Username</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.submit}
+        onPress={() => {
+          focusPassword.current.focus();
+        }}>
+        <Text style={styles.buttontext}>Focus Password</Text>
       </TouchableOpacity>
     </View>
   );
