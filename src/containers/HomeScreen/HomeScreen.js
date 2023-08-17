@@ -18,7 +18,7 @@ import {
   decrementByAmount,
   incrementByAmount,
 } from '../../features/counter/counterSlice';
-import {logOut} from '../../features/Auth/AuthSlice';
+import {toggleStack} from '../../features/Auth/AuthSlice';
 
 const image = {
   uri: '/Users/santhiyavelusamy/Documents/AwesomeProject1/src/assets/car1.jpg',
@@ -69,7 +69,7 @@ const Homescreen = ({navigation}) => {
 
       <TouchableOpacity
         onPress={() => {
-          dispatch(logOut());
+          dispatch(toggleStack());
 
           // persistenthelper.deleteValue('username', null);
           // EventRegister.emit('userLoggedIn', {username: undefined});

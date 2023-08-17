@@ -4,7 +4,7 @@ import {EventRegister} from 'react-native-event-listeners';
 import styles from './styles';
 import persistenthelper from '../../helper/persistenthelper';
 import {useSelector, useDispatch} from 'react-redux';
-import {logIn} from '../../features/Auth/AuthSlice';
+import {toggleStack} from '../../features/Auth/AuthSlice';
 
 const LoginScreen = props => {
   const [username, setUsername] = useState('');
@@ -41,7 +41,7 @@ const LoginScreen = props => {
       <TouchableOpacity
         style={styles.submit}
         onPress={() => {
-          dispatch(logIn());
+          dispatch(toggleStack());
           // persistenthelper.setData('username', username);
           // EventRegister.emit('userLoggedIn', {username});
         }}>
