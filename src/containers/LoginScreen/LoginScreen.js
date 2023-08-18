@@ -10,6 +10,9 @@ const LoginScreen = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  // Tracking previos state value using useRef
+  const prevTextValue = useRef('');
+
   const dispatch = useDispatch();
 
   // Focus the username using ref
@@ -17,14 +20,20 @@ const LoginScreen = props => {
   const focusPassword = useRef();
 
   useEffect(() => {
-    persistenthelper.setObject('mytestobject', {
-      firstName: 'Santhiya',
-      lastName: 'jai',
-    });
-  }, []);
+    if (username != prevTextValue.current) {
+      console.log('value changed', username);
+      prevTextValue.current = username;
+    }
+  }, [username]);
 
   return (
     <View>
+      <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+        Current value: {username}
+      </Text>
+      <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+        Previous Value: {prevTextValue.current}
+      </Text>
       <TextInput
         ref={focusUser}
         value={username}
@@ -48,26 +57,26 @@ const LoginScreen = props => {
         style={styles.submit}
         onPress={() => {
           dispatch(toggleStack());
-          // persistenthelper.setData('username', username);
-          // EventRegister.emit('userLoggedIn', {username});
+          EventRegister.emit('userLoggedIn', {username});
         }}>
         <Text style={styles.buttontext}>Login</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.submit}
-        onPress={() => {
-          focusUser.current.focus();
-        }}>
-        <Text style={styles.buttontext}>Focus Username</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.submit}
-        onPress={() => {
-          focusPassword.current.focus();
-        }}>
-        <Text style={styles.buttontext}>Focus Password</Text>
-      </TouchableOpacity>
+      <View style={{flex: 1}}>
+        <TouchableOpacity
+          style={styles.submit}
+          onPress={() => {
+            focusUser.current.focus();
+          }}>
+          <Text style={styles.buttontext}>Focus Username</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.submit}
+          onPress={() => {
+            focusPassword.current.focus();
+          }}>
+          <Text style={styles.buttontext}>Focus Password</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
