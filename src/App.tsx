@@ -37,6 +37,7 @@ import {increment, decrement} from './features/counter/counterslice';
 import CartScreen from './containers/cardScreen';
 import {useSelector, useDispatch} from 'react-redux';
 import {AuthSlice} from './features/Auth/AuthSlice';
+import analytics from '@react-native-firebase/analytics';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,18 +50,12 @@ function App(): JSX.Element {
   //   setIsUserLoggedIn(username ? true : false);
   // };
 
-  // useEffect(() => {
-  //   getUserName();
+  useEffect(() => {
+    analytics().logEvent('Testrun', {
+      name: 'santhiya',
+    });
+  }, []);
 
-  //   let event = EventRegister.addEventListener('userLoggedIn', data => {
-  //     // console.log(data, 'loggedin');
-  //     setIsUserLoggedIn(data.username ? true : false);
-  //   });
-
-  //   return () => {
-  //     EventRegister.removeEventListener(event);
-  //   };
-  // }, []);
   const Nav = () => {
     const isUserLoggedIn = useSelector(state => state.Auth.isloggedin);
 
