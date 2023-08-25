@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -38,6 +38,8 @@ import CartScreen from './containers/cardScreen';
 import {useSelector, useDispatch} from 'react-redux';
 import {AuthSlice} from './features/Auth/AuthSlice';
 import analytics from '@react-native-firebase/analytics';
+import MapScreen from './containers/MapScreen/Mapscreen';
+import SignupScreen from './containers/signupScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -50,12 +52,6 @@ function App(): JSX.Element {
   //   setIsUserLoggedIn(username ? true : false);
   // };
 
-  useEffect(() => {
-    analytics().logEvent('Testrun', {
-      name: 'santhiya',
-    });
-  }, []);
-
   const Nav = () => {
     const isUserLoggedIn = useSelector(state => state.Auth.isloggedin);
 
@@ -64,6 +60,11 @@ function App(): JSX.Element {
     const getAuthStack = () => {
       return (
         <Stack.Group>
+          <Stack.Screen
+            name="signUp"
+            component={SignupScreen}
+            options={{title: 'SignUP'}}
+          />
           <Stack.Screen
             name="Login"
             component={LoginScreen}
@@ -106,6 +107,11 @@ function App(): JSX.Element {
             name="CartScreen"
             component={CartScreen}
             options={{title: 'Cart'}}
+          />
+          <Stack.Screen
+            name="Maps"
+            component={MapScreen}
+            options={{title: 'Maps'}}
           />
         </Stack.Group>
       );

@@ -66,7 +66,13 @@ const Homescreen = ({navigation}) => {
         }}>
         <Text>Decrement</Text>
       </TouchableOpacity>
-
+      <TouchableOpacity
+        style={styles.buttonText}
+        onPress={() => {
+          navigation.navigate('Maps');
+        }}>
+        <Text>GotoMaps</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
           dispatch(toggleStack());

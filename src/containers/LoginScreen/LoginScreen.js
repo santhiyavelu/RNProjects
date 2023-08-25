@@ -5,6 +5,7 @@ import styles from './styles';
 import persistenthelper from '../../helper/persistenthelper';
 import {useSelector, useDispatch} from 'react-redux';
 import {toggleStack} from '../../features/Auth/AuthSlice';
+import auth from '@react-native-firebase/auth';
 
 const LoginScreen = props => {
   const [username, setUsername] = useState('');
@@ -28,12 +29,12 @@ const LoginScreen = props => {
 
   return (
     <View>
-      <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+      {/* <Text style={{fontSize: 20, fontWeight: 'bold'}}>
         Current value: {username}
       </Text>
       <Text style={{fontSize: 20, fontWeight: 'bold'}}>
         Previous Value: {prevTextValue.current}
-      </Text>
+      </Text> */}
       <TextInput
         ref={focusUser}
         value={username}
@@ -57,9 +58,27 @@ const LoginScreen = props => {
         style={styles.submit}
         onPress={() => {
           dispatch(toggleStack());
-          EventRegister.emit('userLoggedIn', {username});
+          auth()
+            .createUserWithEmailAndPassword(username, password)
+            .then(() => {
+              console.log('User account created & signed in!');
+            })
+            .catch(error => {
+              if (error.code === 'auth/email-already-in-use') {
+                console.log('That email address is already in use!');
+              }
+
+              if (error.code === 'auth/invalid-email') {
+                console.log('That email address is invalid!');
+              }
+
+              console.error(error);
+            });
         }}>
         <Text style={styles.buttontext}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.submit} onPress={() => {}}>
+        <Text style={styles.buttontext}>facebook login</Text>
       </TouchableOpacity>
       <View style={{flex: 1}}>
         <TouchableOpacity
