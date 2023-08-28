@@ -7,7 +7,6 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     request: state => {
-      console.log(state.isFetching, 'state');
       state.isFetching = true;
     },
     success: (state, action) => {

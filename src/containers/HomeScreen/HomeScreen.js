@@ -19,6 +19,7 @@ import {
   incrementByAmount,
 } from '../../features/counter/counterSlice';
 import {toggleStack} from '../../features/Auth/AuthSlice';
+import {userActions} from '../../features/user/userSlice';
 
 const image = {
   uri: '/Users/santhiyavelusamy/Documents/AwesomeProject1/src/assets/car1.jpg',
@@ -26,6 +27,7 @@ const image = {
 
 const Homescreen = ({navigation}) => {
   const [loggedUser, setLoggedUser] = useState('');
+  const {onLogout} = userActions;
 
   const count = useSelector(state => state.counter.value);
   const dispatch = useDispatch();
@@ -75,8 +77,8 @@ const Homescreen = ({navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          dispatch(toggleStack());
-
+          // dispatch(toggleStack());
+          dispatch(onLogout());
           // persistenthelper.deleteValue('username', null);
           // EventRegister.emit('userLoggedIn', {username: undefined});
         }}

@@ -40,6 +40,7 @@ import {AuthSlice} from './features/Auth/AuthSlice';
 import analytics from '@react-native-firebase/analytics';
 import MapScreen from './containers/MapScreen/Mapscreen';
 import SignupScreen from './containers/signupScreen';
+import {userActions} from './features/user/userSlice';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,7 +54,11 @@ function App(): JSX.Element {
   // };
 
   const Nav = () => {
-    const isUserLoggedIn = useSelector(state => state.Auth.isloggedin);
+    const userData = useSelector(state => state.user);
+    const isUserLoggedIn =
+      typeof userData?.data?.id === 'string' ? true : false;
+
+    // const isUserLoggedIn = useSelector(state => state.Auth.isloggedin);
 
     console.log(isUserLoggedIn, 'isUserloggedin');
 
