@@ -6,8 +6,13 @@ import {useDispatch} from 'react-redux';
 import {toggleStack} from '../../features/Auth/AuthSlice';
 import {useEffect} from 'react';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
+import {kApiSignup} from '../../config/webservices';
+import {userActions} from '../../features/user/userSlice';
+
+const {request} = userActions;
 
 const SignupScreen = ({navigation}, props) => {
+  const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -64,6 +69,15 @@ const SignupScreen = ({navigation}, props) => {
   return (
     <View style={styles.container}>
       <TextInput
+        value={username}
+        onChangeText={changedText => {
+          setUserName(changedText);
+        }}
+        placeholder="Enter UserName"
+        style={styles.textinput}
+      />
+
+      <TextInput
         value={email}
         onChangeText={changedText => {
           setEmail(changedText);
@@ -84,8 +98,11 @@ const SignupScreen = ({navigation}, props) => {
         <TouchableOpacity
           style={[styles.submit, styles.signupButton]}
           onPress={() => {
-            handleSignup();
-            dispatch(toggleStack());
+            // handleSignup();
+            dispatch(
+              request({url: kApiSignup, data: {username, email, password}}),
+            );
+            // dispatch(toggleStack());
           }}>
           <Text style={styles.buttontext}>Signup</Text>
         </TouchableOpacity>
