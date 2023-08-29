@@ -41,6 +41,7 @@ import analytics from '@react-native-firebase/analytics';
 import MapScreen from './containers/MapScreen/Mapscreen';
 import SignupScreen from './containers/signupScreen';
 import {userActions} from './features/user/userSlice';
+import FirestoreScreen from './containers/FirestoreScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -96,6 +97,11 @@ function App(): JSX.Element {
             component={HomeScreen}
             options={{title: 'Overview'}}
           />
+          <Stack.Screen
+            name="FirestoreScreen"
+            component={FirestoreScreen}
+            options={{title: 'firestore'}}
+          />
 
           <Stack.Screen
             name="List"
@@ -113,6 +119,7 @@ function App(): JSX.Element {
             component={CartScreen}
             options={{title: 'Cart'}}
           />
+
           <Stack.Screen
             name="Maps"
             component={MapScreen}

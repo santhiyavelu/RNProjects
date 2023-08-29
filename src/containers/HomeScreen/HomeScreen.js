@@ -76,6 +76,13 @@ const Homescreen = ({navigation}) => {
         <Text>GotoMaps</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        style={styles.buttonText}
+        onPress={() => {
+          navigation.navigate('FirestoreScreen');
+        }}>
+        <Text>Go to FirestoreScreen</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => {
           // dispatch(toggleStack());
           dispatch(onLogout());
