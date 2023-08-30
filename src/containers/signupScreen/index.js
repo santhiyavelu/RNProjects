@@ -102,7 +102,7 @@ const SignupScreen = ({navigation}, props) => {
             dispatch(
               request({url: kApiSignup, data: {username, email, password}}),
             );
-            // dispatch(toggleStack());
+            dispatch(toggleStack());
           }}>
           <Text style={styles.buttontext}>Signup</Text>
         </TouchableOpacity>

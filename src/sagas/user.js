@@ -6,6 +6,7 @@ import ApiHelper from '../helper/Apihelper';
 const {request, success, failure} = userActions;
 
 function callPostRequest(url, data, headers) {
+  console.log(url, data, 'sagadata');
   return ApiHelper.post(url, data, headers);
 }
 

@@ -26,7 +26,6 @@ const LoginScreen = props => {
 
   useEffect(() => {
     if (username != prevTextValue.current) {
-      console.log('value changed', username);
       prevTextValue.current = username;
       dispatch(clear());
     }
@@ -52,6 +51,7 @@ const LoginScreen = props => {
       <TextInput
         ref={focusPassword}
         value={password}
+        secureTextEntry={true}
         onChangeText={changedText => {
           setPassword(changedText);
         }}
@@ -63,22 +63,6 @@ const LoginScreen = props => {
         style={styles.submit}
         onPress={() => {
           // dispatch(toggleStack());
-          // auth()
-          //   .createUserWithEmailAndPassword(username, password)
-          //   .then(() => {
-          //     console.log('User account created & signed in!');
-          //   })
-          //   .catch(error => {
-          //     if (error.code === 'auth/email-already-in-use') {
-          //       console.log('That email address is already in use!');
-          //     }
-
-          //     if (error.code === 'auth/invalid-email') {
-          //       console.log('That email address is invalid!');
-          //     }
-
-          //     console.error(error);
-          //   });
           dispatch(request({url: kApiLogin, data: {username, password}}));
         }}>
         <Text style={styles.buttontext}>Login</Text>

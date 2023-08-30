@@ -69,7 +69,7 @@ function App(): JSX.Element {
           <Stack.Screen
             name="signUp"
             component={SignupScreen}
-            options={{title: 'SignUP'}}
+            options={{title: 'Signup'}}
           />
           <Stack.Screen
             name="Login"

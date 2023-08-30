@@ -5,7 +5,8 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-platform :ios, min_ios_version_supported
+  # platform :ios, '13.0'
+  platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
 pod 'FBSDKLoginKit'
@@ -49,6 +50,10 @@ target 'AwesomeProject1' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
+
+
+  # rn_maps_path = '../node_modules/react-native-maps'
+  # pod 'react-native-google-maps', :path => rn_maps_path
 
   target 'AwesomeProject1Tests' do
     inherit! :complete
