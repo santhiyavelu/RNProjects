@@ -36,7 +36,7 @@ const MapScreen = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <MapView
-        // provider={PROVIDER_GOOGLE} // remove provider if not using google map
+        provider={PROVIDER_GOOGLE} // remove provider if not using google map
         style={{flex: 1}}
         ref={mapRef}
         initialRegion={{

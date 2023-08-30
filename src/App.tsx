@@ -67,6 +67,12 @@ function App(): JSX.Element {
       return (
         <Stack.Group>
           <Stack.Screen
+            name="Maps"
+            component={MapScreen}
+            options={{title: 'Maps'}}
+          />
+
+          <Stack.Screen
             name="signUp"
             component={SignupScreen}
             options={{title: 'Signup'}}
