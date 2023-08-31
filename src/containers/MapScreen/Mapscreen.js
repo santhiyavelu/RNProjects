@@ -21,8 +21,8 @@ const MapScreen = ({navigation}) => {
       LocationHelper.fetchLocation(
         position => {
           console.log(position, 'mapposition');
-          // const {latitude, longitude} = position.coords;
-          // setUserLocation({latitude, longitude});
+          const {latitude, longitude} = position.coords;
+          setUserLocation({latitude, longitude});
         },
         error => {
           console.log(error.message, 'Maperror');

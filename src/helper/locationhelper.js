@@ -6,6 +6,7 @@ class LocationHelper {
   fetchLocation = (success, failure) => {
     GeoLocation.getCurrentPosition(
       position => {
+        console.log(position, 'position');
         if (success) {
           success(position);
         }
