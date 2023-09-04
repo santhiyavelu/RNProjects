@@ -20,6 +20,7 @@ import {
 } from '../../features/counter/counterSlice';
 import {toggleStack} from '../../features/Auth/AuthSlice';
 import {userActions} from '../../features/user/userSlice';
+import auth from '@react-native-firebase/auth';
 
 const image = {
   uri: '/Users/santhiyavelusamy/Documents/AwesomeProject1/src/assets/car1.jpg',
@@ -84,8 +85,11 @@ const Homescreen = ({navigation}) => {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
+          auth()
+            .signOut()
+            .then(() => console.log('User signed out!'));
           // dispatch(toggleStack());
-          dispatch(onLogout());
+          // dispatch(onLogout());
           // persistenthelper.deleteValue('username', null);
           // EventRegister.emit('userLoggedIn', {username: undefined});
         }}

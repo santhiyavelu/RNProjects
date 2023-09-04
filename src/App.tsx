@@ -43,6 +43,7 @@ import SignupScreen from './containers/signupScreen';
 import {userActions} from './features/user/userSlice';
 import FirestoreScreen from './containers/FirestoreScreen';
 import {PersistantHelper, NotificationHelper} from './helper';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,30 +60,15 @@ function App(): JSX.Element {
     const userData = useSelector(state => state.user);
 
     useEffect(() => {
-      NotificationHelper.initializeFCM(
-        recievedMessage => {
-          if (recievedMessage.type === 'orderBooked') {
-            //call order api
-          }
+      const subscriber = auth().onAuthStateChanged(user => {
+        setIsUserLoggedIn(!user?.email);
+      });
 
-          if (recievedMessage.type === 'newemail') {
-            //call inbox api
-          }
-        },
-        tappedMessage => {
-          if (tappedMessage.type === 'news') {
-            //navigate to so n so views with data
-            // navigation.navigate('somescreenname');
-          }
-        },
-      );
-      NotificationHelper.checkFCMPermission();
-      NotificationHelper.getToken();
-      NotificationHelper.refreshToken();
-    });
+      return subscriber;
+    }, []);
 
-    const isUserLoggedIn =
-      typeof userData?.data?.id === 'string' ? true : false;
+    // const isUserLoggedIn =
+    //   typeof userData?.data?.id === 'string' ? true : false;
 
     // const isUserLoggedIn = useSelector(state => state.Auth.isloggedin);
 

@@ -17,27 +17,24 @@ const SignupScreen = ({navigation}, props) => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const handleSignup = async () => {
-      try {
-        if (email && password) {
-          await auth().createUserWithEmailAndPassword(email, password);
-          console.log('User account created & signed in!');
-        } else {
-          console.log('Please enter both email and password.');
-        }
-      } catch (error) {
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        } else if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        } else {
-          console.error(error);
-        }
+  const handleSignup = async () => {
+    try {
+      if (email && password) {
+        await auth().createUserWithEmailAndPassword(email, password);
+        console.log('User account created & signed in!');
+      } else {
+        console.log('Please enter both email and password.');
       }
-    };
-    handleSignup();
-  }, [email]);
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+      } else if (error.code === 'auth/invalid-email') {
+        console.log('That email address is invalid!');
+      } else {
+        console.error(error);
+      }
+    }
+  };
 
   async function onFacebookButtonPress() {
     // Attempt login with permissions
@@ -98,11 +95,11 @@ const SignupScreen = ({navigation}, props) => {
         <TouchableOpacity
           style={[styles.submit, styles.signupButton]}
           onPress={() => {
-            // handleSignup();
-            dispatch(
-              request({url: kApiSignup, data: {username, email, password}}),
-            );
-            dispatch(toggleStack());
+            handleSignup();
+            // dispatch(
+            //   request({url: kApiSignup, data: {username, email, password}}),
+            // );
+            // dispatch(toggleStack());
           }}>
           <Text style={styles.buttontext}>Signup</Text>
         </TouchableOpacity>

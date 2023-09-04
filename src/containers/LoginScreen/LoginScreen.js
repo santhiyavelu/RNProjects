@@ -31,6 +31,19 @@ const LoginScreen = props => {
     }
   }, [username]);
 
+  const handleLogin = () => {
+    auth()
+      .signInWithEmailAndPassword(username, password)
+      .then(response => {
+        console.log(response);
+        // You can navigate to another screen or perform any necessary action after successful login here.
+      })
+      .catch(error => {
+        console.log(error);
+        // Handle login error here.
+      });
+  };
+
   return (
     <View>
       {/* <Text style={{fontSize: 20, fontWeight: 'bold'}}>
@@ -45,7 +58,7 @@ const LoginScreen = props => {
         onChangeText={changedText => {
           setUsername(changedText);
         }}
-        placeholder="Enter Username"
+        placeholder="Enter Email"
         style={styles.textinput}
       />
       <TextInput
@@ -62,8 +75,9 @@ const LoginScreen = props => {
       <TouchableOpacity
         style={styles.submit}
         onPress={() => {
+          handleLogin();
           // dispatch(toggleStack());
-          dispatch(request({url: kApiLogin, data: {username, password}}));
+          // dispatch(request({url: kApiLogin, data: {username, password}}));
         }}>
         <Text style={styles.buttontext}>Login</Text>
       </TouchableOpacity>
