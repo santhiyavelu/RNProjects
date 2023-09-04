@@ -1,89 +1,66 @@
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
-import {Text, View, TouchableOpacity} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import {useRef, useEffect, useState, useCallback} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import MapControl from '../../controls/MapControl';
 import LocationHelper from '../../helper/locationhelper';
 
-const markersArray = [
-  {lat: 0, lon: 0},
-  {lat: 0.5, lon: 0.5},
-  {lat: 1, lon: 1},
-  {lat: 1.5, lon: 1.5},
-  {lat: 2, lon: 2},
-  {lat: 2.5, lon: 2.5},
-];
-
-const MapScreen = ({navigation}) => {
-  const mapRef = useRef(null);
-  const [userLocation, setUserLocation] = useState(null);
+const MapScreen = () => {
+  const parentControlMapRef = useRef(null);
+  const [currentLocation, setCurrentLocation] = useState(null);
 
   useEffect(() => {
-    const getuserLocation = () => {
-      LocationHelper.fetchLocation(
-        position => {
-          console.log(position, 'mapposition');
-          const {latitude, longitude} = position.coords;
-          setUserLocation({latitude, longitude});
-        },
-        error => {
-          console.log(error.message, 'Maperror');
-        },
-        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-      );
-    };
-    getuserLocation();
+    LocationHelper.checkLocationPermission(
+      () => {
+        LocationHelper.fetchLocation(
+          locationObject => {
+            if (locationObject.coords) {
+              console.log(locationObject.coords, 'locationObject.coords');
+              parentControlMapRef.current.animateToCustomLocation({
+                latitude: locationObject.coords.latitude,
+                longitude: locationObject.coords.longitude,
+                latitudeDelta: 0.015,
+                longitudeDelta: 0.0121,
+              });
+              setCurrentLocation(locationObject.coords);
+            }
+          },
+          error => {},
+        );
+      },
+      () => {},
+    );
   }, []);
+
+  const showCurrentUserLocation = () => {
+    if (parentControlMapRef.current && currentLocation) {
+      console.log('pressed');
+      // Update the map to the current user's location when the button is pressed
+      parentControlMapRef.current.animateToCustomLocation({
+        latitude: currentLocation.latitude,
+        longitude: currentLocation.longitude,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121,
+      });
+    }
+  };
 
   return (
     <View style={{flex: 1}}>
-      <MapView
-        provider={PROVIDER_GOOGLE} // remove provider if not using google map
-        style={{flex: 1}}
-        ref={mapRef}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        showsUserLocation={true}>
-        {markersArray.map((item, index) => (
-          <Marker
-            key={index}
-            coordinate={{latitude: item.lat, longitude: item.lon}}>
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 20,
-                backgroundColor: 'blue',
-              }}
-            />
-          </Marker>
-        ))}
-      </MapView>
+      <Text>maps</Text>
+      <MapControl ref={parentControlMapRef} style={{flex: 1}} />
       <TouchableOpacity
-        onPress={() => {
-          mapRef.current.animateToRegion({
-            latitude: userLocation.latitude,
-            longitude: userLocation.longitude,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          });
-        }}
+        onPress={showCurrentUserLocation}
         style={{
           position: 'absolute',
+          left: 10,
+          right: 10,
           bottom: 20,
-          right: 20,
           backgroundColor: 'red',
           height: 44,
-          width: 44,
-          borderRadius: 22,
+          borderRadius: 15,
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <View>
-          <Text>Press</Text>
-        </View>
+        <Text>Press</Text>
       </TouchableOpacity>
     </View>
   );
