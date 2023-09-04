@@ -42,6 +42,7 @@ import MapScreen from './containers/MapScreen/Mapscreen';
 import SignupScreen from './containers/signupScreen';
 import {userActions} from './features/user/userSlice';
 import FirestoreScreen from './containers/FirestoreScreen';
+import {PersistantHelper, NotificationHelper} from './helper';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,30 @@ function App(): JSX.Element {
 
   const Nav = () => {
     const userData = useSelector(state => state.user);
+
+    useEffect(() => {
+      NotificationHelper.initializeFCM(
+        recievedMessage => {
+          if (recievedMessage.type === 'orderBooked') {
+            //call order api
+          }
+
+          if (recievedMessage.type === 'newemail') {
+            //call inbox api
+          }
+        },
+        tappedMessage => {
+          if (tappedMessage.type === 'news') {
+            //navigate to so n so views with data
+            // navigation.navigate('somescreenname');
+          }
+        },
+      );
+      NotificationHelper.checkFCMPermission();
+      NotificationHelper.getToken();
+      NotificationHelper.refreshToken();
+    });
+
     const isUserLoggedIn =
       typeof userData?.data?.id === 'string' ? true : false;
 
@@ -67,16 +92,17 @@ function App(): JSX.Element {
       return (
         <Stack.Group>
           <Stack.Screen
+            name="signUp"
+            component={SignupScreen}
+            options={{title: 'Signup'}}
+          />
+
+          <Stack.Screen
             name="Maps"
             component={MapScreen}
             options={{title: 'Maps'}}
           />
 
-          <Stack.Screen
-            name="signUp"
-            component={SignupScreen}
-            options={{title: 'Signup'}}
-          />
           <Stack.Screen
             name="Login"
             component={LoginScreen}
