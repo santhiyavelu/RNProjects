@@ -15,17 +15,43 @@ const FirestoreScreen = ({navigation}) => {
   const [carName, setCarName] = useState('');
 
   useEffect(() => {
-    fetchCars();
+    // Create a reference to the 'Cars' collection
+    const carCollection = firestore().collection('Cars');
+
+    // Add a real-time listener
+    const unsubscribe = carCollection.onSnapshot(querySnapshot => {
+      const cars = [];
+
+      // Iterate through the documents in the collection
+      querySnapshot.forEach(documentSnapshot => {
+        const data = documentSnapshot.data();
+        const id = documentSnapshot.id;
+        cars.push({id, ...data});
+      });
+
+      // Update the carList state with the new data
+      setCarList(cars);
+    });
+
+    // Return a cleanup function to unsubscribe from the listener when the component unmounts
+    return () => unsubscribe();
   }, []);
 
-  const fetchCars = async () => {
-    try {
-      const carCollection = await firestore().collection('Cars').get();
-
-      setCarList(carCollection.docs);
-    } catch (err) {
-      console.log(err);
-    }
+  const addCar = () => {
+    // Add a new car document to the 'Cars' collection
+    firestore()
+      .collection('Cars')
+      .add({
+        carType,
+        carName,
+      })
+      .then(() => {
+        alert('Car added!');
+        // No need to call fetchCars() here
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
@@ -37,8 +63,8 @@ const FirestoreScreen = ({navigation}) => {
           return (
             <View style={styles.carItem}>
               <View style={styles.carInfo}>
-                <Text style={styles.carName}>{item.data().carName}</Text>
-                <Text style={styles.carType}>{item.data().carType}</Text>
+                <Text style={styles.carName}>{item.carName}</Text>
+                <Text style={styles.carType}>{item.carType}</Text>
               </View>
             </View>
           );
@@ -65,26 +91,13 @@ const FirestoreScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.submitButton}
         onPress={() => {
-          firestore()
-            .collection('Cars')
-            .add({
-              carType,
-              carName,
-            })
-            .then(() => {
-              alert('Car added!');
-              fetchCars();
-            })
-            .catch(error => {
-              console.log(error);
-            });
+          addCar(); // Call the addCar function to add a new car
         }}>
         <Text style={styles.buttonText}>Submit</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
