@@ -79,6 +79,14 @@ const Homescreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.buttonText}
         onPress={() => {
+          navigation.navigate('Parent');
+        }}>
+        <Text>Example of useCallback & Memo</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonText}
+        onPress={() => {
           navigation.navigate('FirestoreScreen');
         }}>
         <Text>Go to FirestoreScreen</Text>

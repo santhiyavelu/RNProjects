@@ -44,6 +44,7 @@ import {userActions} from './features/user/userSlice';
 import FirestoreScreen from './containers/FirestoreScreen';
 import {PersistantHelper, NotificationHelper} from './helper';
 import auth from '@react-native-firebase/auth';
+import ParentComponent from './ParentComponent';
 
 const Stack = createNativeStackNavigator();
 
@@ -61,7 +62,7 @@ function App(): JSX.Element {
 
     useEffect(() => {
       const subscriber = auth().onAuthStateChanged(user => {
-        setIsUserLoggedIn(!user?.email);
+        setIsUserLoggedIn(!!user?.email);
       });
 
       return subscriber;
@@ -115,6 +116,12 @@ function App(): JSX.Element {
             component={HomeScreen}
             options={{title: 'Overview'}}
           />
+          <Stack.Screen
+            name="Parent"
+            component={ParentComponent}
+            options={{title: 'Memo&useCallback'}}
+          />
+
           <Stack.Screen
             name="FirestoreScreen"
             component={FirestoreScreen}
