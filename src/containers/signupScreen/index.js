@@ -8,8 +8,10 @@ import {useEffect} from 'react';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
 import {kApiSignup} from '../../config/webservices';
 import {userActions} from '../../features/user/userSlice';
+import {NativeModules, Button} from 'react-native';
 
 const {request} = userActions;
+const {CalendarModule} = NativeModules;
 
 const SignupScreen = ({navigation}, props) => {
   const [username, setUserName] = useState('');
@@ -52,6 +54,10 @@ const SignupScreen = ({navigation}, props) => {
 
     // Once signed in, get the users AccessToken
     const data = await AccessToken.getCurrentAccessToken();
+
+    const onPress = () => {
+      CalendarModule.createCalendarEvent('testName', 'testLocation');
+    };
 
     if (!data) {
       throw 'Something went wrong obtaining access token';
@@ -124,15 +130,16 @@ const SignupScreen = ({navigation}, props) => {
         }}>
         <Text style={styles.buttontext}>Sign in with facebook</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity
-        style={styles.fbButton}
+      <Button
+        title="Click to invoke your native module!"
+        color="#841584"
         onPress={() => {
-          console.log('pressed');
-
-          onDisplayNotification();
-        }}>
-        <Text style={styles.buttontext}>Display Notification</Text>
-      </TouchableOpacity> */}
+          CalendarModule.createCalendarEvent(
+            'Native Module',
+            'Integration with react native',
+          );
+        }}
+      />
     </View>
   );
 };

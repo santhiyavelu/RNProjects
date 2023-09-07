@@ -25,6 +25,8 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+              packages.add(new MyAppPackage());
+
           return packages;
         }
 
@@ -59,4 +61,12 @@ public class MainApplication extends Application implements ReactApplication {
     }
     ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
+
+  // @Override
+  // protected List<ReactPackage> getPackages() {
+  //   @SuppressWarnings("UnnecessaryLocalVariable")
+  //   List<ReactPackage> packages = new PackageList(this).getPackages();
+  //   // below MyAppPackage is added to the list of packages returned
+  //   return packages;
+  // }
 }
