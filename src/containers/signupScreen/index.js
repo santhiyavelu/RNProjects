@@ -8,7 +8,6 @@ import {useEffect} from 'react';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
 import {kApiSignup} from '../../config/webservices';
 import {userActions} from '../../features/user/userSlice';
-import notifee from '@notifee/react-native';
 
 const {request} = userActions;
 
@@ -65,39 +64,6 @@ const SignupScreen = ({navigation}, props) => {
 
     // Sign-in the user with the credential
     return auth().signInWithCredential(facebookCredential);
-  }
-
-  async function onDisplayNotification() {
-    try {
-      // Request permissions (required for iOS)
-      // if (Platform.os == 'ios') {
-      await notifee.requestPermission();
-      // }
-
-      // Create a channel (required for Android)
-      const channelId = await notifee.createChannel({
-        id: 'default',
-        name: 'Default Channel',
-      });
-
-      // Display a notification
-      await notifee.displayNotification({
-        title: 'Notification Title',
-        body: 'Main body content of the notification',
-        android: {
-          channelId,
-          // smallIcon: 'name-of-a-small-icon', // optional, defaults to 'ic_launcher'.
-          // pressAction is needed if you want the notification to open the app when pressed
-          pressAction: {
-            id: 'default',
-          },
-        },
-      });
-
-      console.log('Notification displayed successfully');
-    } catch (error) {
-      console.error('Error displaying notification:', error);
-    }
   }
 
   return (
@@ -158,7 +124,7 @@ const SignupScreen = ({navigation}, props) => {
         }}>
         <Text style={styles.buttontext}>Sign in with facebook</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.fbButton}
         onPress={() => {
           console.log('pressed');
@@ -166,7 +132,7 @@ const SignupScreen = ({navigation}, props) => {
           onDisplayNotification();
         }}>
         <Text style={styles.buttontext}>Display Notification</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
