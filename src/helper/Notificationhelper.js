@@ -19,7 +19,7 @@ class NotificationHelper {
 
   initializeFCM = (onRecieve, onTap) => {
     this.messageListener = messaging().onMessage(async remoteMessage => {
-      console.log(remoteMessage);
+      console.log(remoteMessage, 'message from FCM');
 
       //external callback if any
       if (onRecieve) {
