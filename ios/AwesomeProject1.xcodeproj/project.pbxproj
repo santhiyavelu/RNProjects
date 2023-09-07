@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		810A092531FD95D4645332C7 /* Pods_AwesomeProject1_AwesomeProject1Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C415120B5AD95775AC6E05 /* Pods_AwesomeProject1_AwesomeProject1Tests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9817F23A2AAA03D700AB5B2D /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9817F2392AAA03D700AB5B2D /* RCTCalendarModule.m */; };
 		98C9F3A82A8F879B00A122C2 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 98C9F3A72A8F879B00A122C2 /* Fonts */; };
 		98F39E992A94AA9300B88F71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98F39E982A94AA9300B88F71 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,8 @@
 		5B7EB9410499542E8C5724F5 /* Pods-AwesomeProject1-AwesomeProject1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject1-AwesomeProject1Tests.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeProject1-AwesomeProject1Tests/Pods-AwesomeProject1-AwesomeProject1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AwesomeProject1/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-AwesomeProject1-AwesomeProject1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject1-AwesomeProject1Tests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject1-AwesomeProject1Tests/Pods-AwesomeProject1-AwesomeProject1Tests.release.xcconfig"; sourceTree = "<group>"; };
+		9817F2382AAA03D700AB5B2D /* RCTCalendarModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RCTCalendarModule.h; path = AwesomeProject1/RCTCalendarModule.h; sourceTree = "<group>"; };
+		9817F2392AAA03D700AB5B2D /* RCTCalendarModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RCTCalendarModule.m; path = AwesomeProject1/RCTCalendarModule.m; sourceTree = "<group>"; };
 		98C9F3A72A8F879B00A122C2 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		98F39E982A94AA9300B88F71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "AwesomeProject1/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B2C415120B5AD95775AC6E05 /* Pods_AwesomeProject1_AwesomeProject1Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AwesomeProject1_AwesomeProject1Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +101,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				9817F2382AAA03D700AB5B2D /* RCTCalendarModule.h */,
+				9817F2392AAA03D700AB5B2D /* RCTCalendarModule.m */,
 			);
 			name = AwesomeProject1;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9817F23A2AAA03D700AB5B2D /* RCTCalendarModule.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
