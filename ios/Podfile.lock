@@ -872,6 +872,11 @@ PODS:
     - nanopb/encode (= 2.30909.0)
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
+<<<<<<< HEAD
+=======
+  - Permission-Camera (3.6.1):
+    - RNPermissions
+>>>>>>> f0df6e294f5b35a6c9e6fca8b8a720e720524932
   - PromisesObjC (2.3.1)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -1175,7 +1180,7 @@ PODS:
     - React-Core
   - react-native-maps (1.7.1):
     - React-Core
-  - react-native-safe-area-context (4.7.1):
+  - react-native-safe-area-context (4.7.2):
     - React-Core
   - React-NativeModulesApple (0.72.3):
     - React-callinvoker
@@ -1283,20 +1288,20 @@ PODS:
     - React-logger (= 0.72.3)
     - React-perflogger (= 0.72.3)
   - RecaptchaInterop (100.0.0)
-  - RNCAsyncStorage (1.19.1):
+  - RNCAsyncStorage (1.19.3):
     - React-Core
-  - RNFBAnalytics (18.3.0):
+  - RNFBAnalytics (18.3.2):
     - Firebase/Analytics (= 10.14.0)
     - React-Core
     - RNFBApp
-  - RNFBApp (18.3.1):
+  - RNFBApp (18.3.2):
     - Firebase/CoreOnly (= 10.14.0)
     - React-Core
-  - RNFBAuth (18.3.1):
+  - RNFBAuth (18.3.2):
     - Firebase/Auth (= 10.14.0)
     - React-Core
     - RNFBApp
-  - RNFBFirestore (18.3.1):
+  - RNFBFirestore (18.3.2):
     - Firebase/Firestore (= 10.14.0)
     - nanopb (< 2.30910.0, >= 2.30908.0)
     - React-Core
@@ -1311,9 +1316,9 @@ PODS:
     - RNNotifee/NotifeeCore (= 7.8.0)
   - RNNotifee/NotifeeCore (7.8.0):
     - React-Core
-  - RNPermissions (3.8.4):
+  - RNPermissions (3.6.1):
     - React-Core
-  - RNScreens (3.23.0):
+  - RNScreens (3.25.0):
     - React-Core
     - React-RCTImage
   - RNVectorIcons (10.0.0):
@@ -1567,6 +1572,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
+<<<<<<< HEAD
+=======
+  Permission-Camera: bf6791b17c7f614b6826019fcfdcc286d3a107f6
+>>>>>>> f0df6e294f5b35a6c9e6fca8b8a720e720524932
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: a2faf4bad4e438ca37b2040cb8f7799baa065c18
@@ -1577,7 +1586,7 @@ SPEC CHECKSUMS:
   React-Core: 8293312ad137ea82fd2c29deb163dbc24aa4e00e
   React-CoreModules: 32fab1d62416849a3b6dac6feff9d54e5ddc2d1e
   React-cxxreact: 55d0f7cb6b4cc09ba9190797f1da87182d1a2fb6
-  React-debug: b76c2a2d03da4e34322c60b951e7a4d2b2004765
+  React-debug: 14216864d5c2dc821435c6e649448e2dbbd746cf
   React-jsc: 0db8e8cc2074d979c37ffa7b8d7c914833960497
   React-jsi: 58677ff4848ceb6aeb9118fe03448a843ea5e16a
   React-jsiexecutor: 2c15ba1bace70177492368d5180b564f165870fd
@@ -1588,8 +1597,8 @@ SPEC CHECKSUMS:
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-google-maps: dd12cdd86b8e3fedbbb671676aedaa2f656e2ccd
   react-native-maps: 667f9b975549c6fa9b1631bf859440f68ebd3b8f
-  react-native-safe-area-context: 9697629f7b2cda43cf52169bb7e0767d330648c2
-  React-NativeModulesApple: ff8035b2fb1fc416e258b294d1e85b6bb5710edd
+  react-native-safe-area-context: 7aa8e6d9d0f3100a820efb1a98af68aa747f9284
+  React-NativeModulesApple: 21920386533897c2e02b2b33272e17b037958801
   React-perflogger: 6bd153e776e6beed54c56b0847e1220a3ff92ba5
   React-RCTActionSheet: c0b62af44e610e69d9a2049a682f5dba4e9dff17
   React-RCTAnimation: fe7005136b58f58871cab2f70732343b6e330d30
@@ -1603,23 +1612,27 @@ SPEC CHECKSUMS:
   React-RCTVibration: ea3a68a49873a54ced927c90923fc6932baf344a
   React-rncore: 9672a017af4a7da7495d911f0b690cbcae9dd18d
   React-runtimeexecutor: 369ae9bb3f83b65201c0c8f7d50b72280b5a1dbc
-  React-runtimescheduler: 6242fd577d480eabaa6f1bca6b431481312e589a
-  React-utils: 5c0c97026ef4b5cd32acafabf3164bbb29fb99f8
-  ReactCommon: 14652c9fe82f14f6963125be07ffe60865ddf574
+  React-runtimescheduler: 238a24e889d34307b8cdc86cc0a09733ab6256b7
+  React-utils: 0ebdf51ab5acb12230194e2a6ecfd36450574955
+  ReactCommon: 94464b4a904ba59644a6fc4c7e76c9ab36a54116
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
-  RNCAsyncStorage: f47fe18526970a69c34b548883e1aeceb115e3e1
-  RNFBAnalytics: 989f6c2263a9e74253127ac3ce1f7fb815e8e61d
-  RNFBApp: 73795c4680eba994f9639c6bb8e0aed3c0a14394
-  RNFBAuth: 76ee6c9adf962127fab3ed88d26d4caf6f435812
-  RNFBFirestore: 022e84bf1d17a498bb558a746df2a13eeab4b03c
+  RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
+  RNFBAnalytics: c8093f98753bb799409192411637402209748515
+  RNFBApp: 8060d3ea89359ae78e0d1e6362a8ce9d2f5d19a8
+  RNFBAuth: 5db7274fc2d8701b1e9cc3fd76eba677f5260648
+  RNFBFirestore: 8bbf230c05f1cfc41fb52ff33b64fc3547174e5f
   RNFBMessaging: 40f7d8b2dd76b888b38df6baf54898867caef5fe
   RNNotifee: f3c01b391dd8e98e67f539f9a35a9cbcd3bae744
-  RNPermissions: 09010ab77268f92c9d34d8ab696532d6cdb8c2a3
-  RNScreens: 6a8a3c6b808aa48dca1780df7b73ea524f602c63
+  RNPermissions: dcdb7b99796bbeda6975a6e79ad519c41b251b1c
+  RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 8796b55dba14d7004f980b54bcc9833ee45b28ce
 
+<<<<<<< HEAD
 PODFILE CHECKSUM: af289238a4f14939430561ab7763cc847cf8647a
+=======
+PODFILE CHECKSUM: 0ccb1686092a05dac317f090688eaabeb75670c3
+>>>>>>> f0df6e294f5b35a6c9e6fca8b8a720e720524932
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.11.3
