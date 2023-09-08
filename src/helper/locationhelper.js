@@ -90,6 +90,49 @@ class LocationHelper {
         if (failureCallback) failureCallback();
       });
   };
+
+  checkCameraPermission = (successCallback, failureCallback) => {
+    check(
+      Platform.select({
+        android: PERMISSIONS.ANDROID.CAMERA,
+        ios: PERMISSIONS.IOS.CAMERA,
+      }),
+    )
+      .then(result => {
+        switch (result) {
+          case RESULTS.UNAVAILABLE:
+            this.requestCameraPermission(successCallback, failureCallback);
+            break;
+          case RESULTS.DENIED:
+            this.requestCameraPermission(successCallback, failureCallback);
+            break;
+          case RESULTS.GRANTED:
+            successCallback();
+            break;
+          case RESULTS.BLOCKED:
+            this.requestCameraPermission(successCallback, failureCallback);
+            break;
+        }
+      })
+      .catch(error => {
+        failureCallback(error);
+      });
+  };
+
+  requestCameraPermission = (successCallback, failureCallback) => {
+    request(
+      Platform.select({
+        android: PERMISSIONS.ANDROID.CAMERA,
+        ios: PERMISSIONS.IOS.CAMERA,
+      }),
+    )
+      .then(result => {
+        if (successCallback) successCallback();
+      })
+      .catch(error => {
+        if (failureCallback) failureCallback();
+      });
+  };
 }
 
 export default new LocationHelper();

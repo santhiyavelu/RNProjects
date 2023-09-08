@@ -57,6 +57,9 @@ target 'AwesomeProject1' do
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  
   target 'AwesomeProject1Tests' do
     inherit! :complete
     # Pods for testing

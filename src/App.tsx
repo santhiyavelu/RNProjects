@@ -43,6 +43,7 @@ import SignupScreen from './containers/signupScreen';
 import {userActions} from './features/user/userSlice';
 import FirestoreScreen from './containers/FirestoreScreen';
 import {PersistantHelper, NotificationHelper} from './helper';
+import ScanScreen from './containers/ScanScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,6 +92,12 @@ function App(): JSX.Element {
     const getAuthStack = () => {
       return (
         <Stack.Group>
+          <Stack.Screen
+            name="scanScreen"
+            component={ScanScreen}
+            options={{title: 'ScanScreen'}}
+          />
+
           <Stack.Screen
             name="signUp"
             component={SignupScreen}
